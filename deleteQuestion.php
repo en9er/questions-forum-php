@@ -10,5 +10,5 @@ try {
     echo ("Error deleting question: " . $error->getMessage());
 }
 // перенаправление на главную страницу приложения
-header("Refresh:0; url=index.php");
+header("Refresh:0; url=userQuestions.php");
 exit( );
