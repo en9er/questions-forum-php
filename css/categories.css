@@ -1,0 +1,19 @@
+a{
+    text-decoration: none !important;
+}
+.category_info
+{
+    text-decoration: none;
+    color: black;
+}
+.category_info :hover
+{
+    text-decoration: none;
+    color: #424242;
+}
+
+
+.categories_header
+{
+    color: gray;
+}

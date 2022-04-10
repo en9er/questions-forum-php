@@ -1,27 +1,18 @@
-<table>
 <?php
+require_once "header.php";
 require 'dbconnect.php';
-echo '<br>';
 
 //error_reporting(E_ALL);
 //ini_set('display_errors', 1);
-session_start();
-
-
-if(isset($_SESSION['userId']))
-{
-    echo ('<a href="userQuestions.php">My questions</a>');
-    echo (' <a style="position: absolute; right: 5%; top: 2%;" href="logout.php">Logout</a>');
-    if(isset($_SESSION['msg']))
-    {
-        echo $_SESSION['msg'];
-    }
-}
-else
-{
-    echo 'You are not logged in ';
-    echo ('<a href="auth.php">Login here</a>');
-}
-
-$_SESSION['msg'] = "";
 ?>
+<div class="container mt-100">
+    <div class="d-flex flex-wrap justify-content-between">
+        <div> <a href="userQuestions.php" class="btn btn-shadow btn-wide btn-primary"> <span class="btn-icon-wrapper pr-2 opacity-7"></span> New thread </a> </div>
+        <div class="d-flex col-12 col-md-3 p-0 mb-3">
+            <input type="text" class="form-control" placeholder="Search...">
+            <button class="btn btn-success mx-2 my-sm-0" type="button">Search</button>
+        </div>
+    </div>
+</div>
+<?php
+require_once "questions.php";
