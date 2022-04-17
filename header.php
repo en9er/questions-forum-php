@@ -16,7 +16,7 @@
     <div class="collapse navbar-collapse d-flex justify-content-between" id="navb">
         <ul class="navbar-nav d-flex justify-content-between">
             <li class="nav-item mr-5">
-                <a class="nav-link" href="userQuestions.php">My questions</a>
+                <a class="nav-link" href="userQuestions.php?only_my">My questions</a>
             </li>
             <li class="nav-item mr-5">
                 <a class="nav-link" href="categories.php">Categories</a>
@@ -26,7 +26,29 @@
             <?php
                 if (isset($_SESSION['userId']))
                 {
-                    echo '<a href="logout.php" class="btn btn-danger my-sm-1">Logout</a>';
+                    echo '
+                            <div class="collapse navbar-collapse" id="navbar-list-4">
+                                <ul class="navbar-nav">
+                                    <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          ';
+                    if(!isset($_SESSION['avatarUrl']))
+                    {
+                        echo '<img src="res/img/no_account_black.svg" width="40" height="40" class="rounded-circle" alt="no_account">';
+                    }
+                    else
+                    {
+                        echo "<img src='$_SESSION[avatarUrl]' width='40' height='40' class='rounded-circle'>";
+                    }
+                    echo '
+                          </a>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+                                <a class="dropdown-item" href="profile.php">Profile</a>
+                                    <a class="dropdown-item" href="logout.php">Log Out</a>
+                            </div>
+                                    </li>   
+                                </ul>
+                          </div>';
                 }
                 else
                 {

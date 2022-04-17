@@ -32,9 +32,8 @@ if(!isset($_SESSION['userId']))
                 $_SESSION['name'] = $row['name'];
                 $_SESSION['userId'] = $row['userId'];
                 echo $_SESSION['userId'];
-                //if ($row['is_teacher']==1) $_SESSION['teacher'] = true;
-                echo $msg =  "Вы вошли в систему как " . $_SESSION['login'];
-                header('Location: http://localhost/site/userQuestions.php');
+                header("Location: index.php");
+                //header('Location: http://localhost/site/userQuestions.php');
             }
         }
         else $_SESSION['form_err'] =  "Неправильное имя пользователя или пароль";
@@ -79,4 +78,8 @@ if(!isset($_SESSION['userId']))
     </html>
 <?php
     }
+else
+{
+    header("Location ");
+}
 ?>

@@ -1,5 +1,6 @@
 <?php
 require_once "dbconnect.php";
+require_once "errors.php";
 try {
     $sql = 'SELECT questionId FROM question';
     $result_select = $conn->query($sql);
@@ -19,17 +20,38 @@ try {
     }
 
 
+    $filters = "";
 
+    if(isset($_GET["only_my"]))
+    {
+        if(isset($_SESSION["userId"]))
+        {
+            $filters = "askedById=" . $_SESSION["userId"];
+        }
+        else
+        {
+            require_once "auth.php";
+            exit();
+        }
+    }
+    else
+    {
+        $filters = "True";
+    }
 
-    $sql = 'SELECT question, questionId, name, categoryName
+    $sql = "SELECT question, questionId, name, categoryName
           FROM question q
           JOIN user u on q.askedById = u.userId 
           JOIN category c on q.categoryId = c.categoryId
-          LIMIT 10';
-    $result_select = $conn->query($sql);
+          WHERE {$filters}
+          LIMIT 10";
+
+
+    $result = $conn->query($sql);
+
 
 } catch (PDOexception $error) {
-    echo "Get categories error: " . $error->getMessage();
+    echo "Get questions error: " . $error->getMessage();
 }
 
 
@@ -49,7 +71,7 @@ $_SESSION['msg'] = "";
         </div>
         <?php
         $i = 0;
-        while ($object = $result_select->fetch())
+        while ($object = $result->fetch())
         {
             printf('
         <hr class="m-0">
