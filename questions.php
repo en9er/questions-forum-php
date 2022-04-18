@@ -22,7 +22,7 @@ try {
 
     $filters = "";
 
-    if(isset($_GET["only_my"]))
+    if(isset($_SESSION["only_my_questions"]) && $_SESSION['only_my_questions'])
     {
         if(isset($_SESSION["userId"]))
         {
@@ -33,6 +33,10 @@ try {
             require_once "auth.php";
             exit();
         }
+    }
+    elseif (isset($_SESSION['only_category_questions']) && isset($_GET['categoryId']))
+    {
+        $filters = "q.categoryId=" . $_GET["categoryId"];
     }
     else
     {
@@ -57,7 +61,7 @@ try {
 
 $_SESSION['msg'] = "";
 ?>
-<div class="container my-2">
+
     <div class="card mb-3">
         <div class="card-header pl-0 pr-0">
             <div class="row no-gutters w-100 align-items-center">
@@ -78,7 +82,7 @@ $_SESSION['msg'] = "";
         <div class="card-body py-3">
             <div class="row no-gutters align-items-center">
                 <div class="col-10"> <a href="question.php?questionId=%d" class="text-big text-danger" data-abc="true">%s</a>
-                    <div class="text-muted small mt-1">Category: %s<br>Started 25 days ago &nbsp;·&nbsp; <a href="javascript:void(0)" class="text-muted" data-abc="true">%s</a></div>
+                    <div class="text-muted small mt-1">Category: %s<br>Started 25 days ago &nbsp;·&nbsp; <a href="%s" class="text-muted" data-abc="true">%s</a></div>
                 </div>
                 <div class="d-none d-md-block col-2">
                     <div class="d-flex row no-gutters align-items-center justify-content-center">
@@ -86,7 +90,7 @@ $_SESSION['msg'] = "";
                     </div>
                 </div>
             </div>
-        </div>', $object['questionId'], $object['question'], $object["categoryName"], $object['name'], $countArray[$i]);
+        </div>', $object['questionId'], $object['question'], $object["categoryName"], "profile.php", $object['name'], $countArray[$i]);
             $i++;
         }
 
@@ -102,4 +106,3 @@ $_SESSION['msg'] = "";
             <li class="page-item"><a class="page-link" href="javascript:void(0)" data-abc="true">»</a></li>
         </ul>
     </nav>
-</div>

@@ -8,7 +8,7 @@ if(!isset($_SESSION['userId']))
     if (isset($_POST["login"]) and $_POST["login"]!='')
     {
         try {
-            $sql = 'SELECT userId, name, email, md5PasswordHash FROM user WHERE login=(:login)';
+            $sql = 'SELECT userId, name, email, avatarUrl, md5PasswordHash FROM user WHERE login=(:login)';
             $stmt = $conn->prepare($sql);
             $stmt->bindValue(':login', $_POST['login']);
             $stmt->execute();
@@ -31,6 +31,7 @@ if(!isset($_SESSION['userId']))
                 $_SESSION['email'] = $row['email'];
                 $_SESSION['name'] = $row['name'];
                 $_SESSION['userId'] = $row['userId'];
+                $_SESSION['avatarUrl'] = $row['avatarUrl'];
                 echo $_SESSION['userId'];
                 header("Location: index.php");
                 //header('Location: http://localhost/site/userQuestions.php');

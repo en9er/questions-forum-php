@@ -4,6 +4,7 @@ require 'dbconnect.php';
 
 //error_reporting(E_ALL);
 //ini_set('display_errors', 1);
+require_once 'questions_filters/filter_all_questions.php';
 ?>
 <div class="container mt-100">
     <div class="d-flex flex-wrap justify-content-between">
@@ -13,6 +14,7 @@ require 'dbconnect.php';
             <button class="btn btn-success mx-2 my-sm-0" type="button">Search</button>
         </div>
     </div>
+    <?php
+    require_once "questions.php";
+    ?>
 </div>
-<?php
-require_once "questions.php";

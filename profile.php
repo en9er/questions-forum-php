@@ -1,5 +1,4 @@
 <?php
-    require "errors.php";
     require_once "header.php";
     require 'dbconnect.php';
 
@@ -8,6 +7,7 @@
         require 'auth.php';
         exit();
     }
+    require_once 'questions_filters/filter_only_user_questions.php';
     $msg = "";
     // if button clicked
     if (isset($_POST['save'])) {
@@ -42,7 +42,7 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="d-flex flex-column align-items-center text-center">
-                            <img src="<?php echo $_SESSION['avatarUrl'] ?>" alt="Admin" class="rounded-circle" width="150" height="150">
+                            <img src="<?php echo $_SESSION['avatarUrl'] ?>" class="rounded-circle" width="150" height="150">
                             <div class="mt-3">
                                 <h4><?php echo $_SESSION['login'] ?></h4>
                                 <p class="text-muted font-size-sm"><?php echo $_SESSION['email'] ?></p>
@@ -98,6 +98,8 @@
                 </div>
             </div>
         </div>
+        <div> <a href="userQuestions.php" class="btn btn-shadow btn-wide btn-primary"> <span class="btn-icon-wrapper pr-2 opacity-7"></span> New thread </a> </div>
+        <?php require "questions.php"?>
 
     </div>
 </div>

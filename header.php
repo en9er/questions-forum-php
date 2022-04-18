@@ -16,13 +16,18 @@
     <div class="collapse navbar-collapse d-flex justify-content-between" id="navb">
         <ul class="navbar-nav d-flex justify-content-between">
             <li class="nav-item mr-5">
-                <a class="nav-link" href="userQuestions.php?only_my">My questions</a>
-            </li>
-            <li class="nav-item mr-5">
                 <a class="nav-link" href="categories.php">Categories</a>
             </li>
+            <li class="nav-item mr-5">
+                <a class="nav-link" href="#">Rating</a>
+            </li>
+
         </ul>
         <div class="navbar-nav">
+            <div class="d-flex p-2">
+                <input type="text" class="form-control" placeholder="Search...">
+                <button class="btn btn-success mx-2 my-sm-0" type="button">Search</button>
+            </div>
             <?php
                 if (isset($_SESSION['userId']))
                 {
