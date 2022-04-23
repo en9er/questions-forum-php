@@ -42,13 +42,18 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="d-flex flex-column align-items-center text-center">
-                            <img src="<?php echo $_SESSION['avatarUrl'] ?>" class="rounded-circle" width="150" height="150">
+                            <div class="profile_image">
+                                <?php if($_SESSION['avatarUrl'] != "res/img/no_account_black.svg")
+                                    echo '<a href="deleteAvatar.php"><img src="res/img/close_btn.svg" class="profile_delete_btn btn-danger"></a>'
+                                    ?>
+                                <img src="<?php echo $_SESSION['avatarUrl'] ?>" class="rounded-circle" width="150" height="150">
+                            </div>
                             <div class="mt-3">
                                 <h4><?php echo $_SESSION['login'] ?></h4>
                                 <p class="text-muted font-size-sm"><?php echo $_SESSION['email'] ?></p>
                             </div>
                         </div>
-                        <form class="d-flex flex-column align-items-center  justify-content-center border"
+                        <form class="d-flex flex-column align-items-center  justify-content-center"
                               method="POST"
                               action=""
                               enctype="multipart/form-data">

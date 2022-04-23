@@ -62,7 +62,7 @@ try {
 $_SESSION['msg'] = "";
 ?>
 
-    <div class="card mb-3">
+    <div class="card mb-3 mt-3">
         <div class="card-header pl-0 pr-0">
             <div class="row no-gutters w-100 align-items-center">
                 <div class="col ml-3">Topics</div>
