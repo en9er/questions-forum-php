@@ -103,7 +103,7 @@
                 </div>
             </div>
         </div>
-        <div> <a href="userQuestions.php" class="btn btn-shadow btn-wide btn-primary"> <span class="btn-icon-wrapper pr-2 opacity-7"></span> New thread </a> </div>
+        <div> <a href="new_thread.php" class="btn btn-shadow btn-wide btn-primary"> <span class="btn-icon-wrapper pr-2 opacity-7"></span> New thread </a> </div>
         <?php require "questions.php"?>
 
     </div>

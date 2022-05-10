@@ -44,7 +44,9 @@ if(isset($_GET['categoryId']))
 
 
     $_SESSION['msg'] = "";
+    echo "<div class='container'>";
     require_once 'questions.php';
+    echo "</div>"
     ?>
 
 <?php

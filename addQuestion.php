@@ -17,7 +17,6 @@ if(isset($_SESSION['userId']))
             $stmt->bindValue(':questionText', $_GET['questionText']);
             $stmt->bindValue(':categoryId', $_GET['categoryId']);
             $stmt->execute();
-            echo ("Question added");
 
         } catch (PDOexception $error) {
             echo ("Error adding question: " . $error->getMessage());
@@ -25,14 +24,14 @@ if(isset($_SESSION['userId']))
 
         if($addStatus)
         {
-            header("Refresh:0; url=userQuestions.php");
+            header("Refresh:0; url=profile.php");
         }
         exit( );
     }
     else
     {
         $_SESSION['msg'] = "Question text must be not empty";
-        header("Refresh:0; url=userQuestions.php");
+        header("Refresh:0; url=new_thread.php");
         exit( );
     }
 
