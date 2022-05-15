@@ -2,5 +2,5 @@
 session_start();
 session_unset();
 $_SESSION['msg'] =  "Вы успешно вышли из системы";
-header('Location: http://localhost/site');
+header('Location:'. $_SERVER["HTTP_REFERER"]);
 exit( );
