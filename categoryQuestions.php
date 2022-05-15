@@ -3,7 +3,7 @@ require_once "dbconnect.php";
 require_once "header.php";
 if(isset($_GET['categoryId']))
 {
-    require_once 'questions_filters/filter_only_category_questions.php';
+    require 'questions_filters/filter_only_category_questions.php';
     try {
         $sql = 'SELECT questionId FROM question WHERE categoryId=:categoryId';
         $result_select = $conn->prepare($sql);
