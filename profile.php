@@ -11,23 +11,27 @@
     $msg = "";
     // if button clicked
     if (isset($_POST['save'])) {
-        $filename = $_FILES["avatar"]["name"];
-        $tempname = $_FILES["avatar"]["tmp_name"];
-        $folder = "tmp/avatars/". $_SESSION['login'] . '_' .$filename;
+        echo $_FILES;
+        if ($file = fopen($_FILES['avatar']['tmp_name'], 'r+')){
+            //получение расширения
+            $ext = explode('.', $_FILES["avatar"]["name"]);
+            $ext = $ext[count($ext) - 1];
+            $filename = 'file' . rand(100000, 999999) . '.' . $ext;
 
-        $sql = "UPDATE user SET `avatarUrl`='$folder' WHERE `userId`=:userId";
-        $stmt = $conn->prepare($sql);
-        $stmt->bindValue(":userId", $_SESSION['userId']);
-        $stmt->debugDumpParams();
-        $stmt->execute();
+            $resource = Container::getFileUploader()->store($file, $filename);
+            $picture_url = $resource['ObjectURL'];
+            echo $picture_url;
+            $_SESSION['avatarUrl'] = $picture_url;
+            $sql = "UPDATE user SET `avatarUrl`='$picture_url' WHERE `userId`=:userId";
+            $stmt = $conn->prepare($sql);
+            $stmt->bindValue(":userId", $_SESSION['userId']);
+            $stmt->debugDumpParams();
+            $stmt->execute();
 
-        if (move_uploaded_file($tempname, $folder))  {
-            $_SESSION['avatarUrl'] = $folder;
-            $msg = "Image uploaded successfully";
             header("Location: profile.php");
         }
-        else {
-            $msg = "Failed to upload image";
+        else{
+            echo "No photo";
         }
     }
 ?>

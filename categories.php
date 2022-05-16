@@ -21,7 +21,7 @@ try {
 
 
 
-    $sql = 'SELECT * FROM category LIMIT 10';
+    $sql = 'SELECT * FROM category';
     $result_select = $conn->query($sql);
 
 } catch (PDOexception $error) {

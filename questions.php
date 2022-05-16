@@ -47,8 +47,7 @@ try {
           FROM question q
           JOIN user u on q.askedById = u.userId 
           JOIN category c on q.categoryId = c.categoryId
-          WHERE {$filters}
-          LIMIT 10";
+          WHERE {$filters}";
 
 
     $result = $conn->query($sql);
