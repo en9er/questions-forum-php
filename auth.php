@@ -33,7 +33,14 @@ if(!isset($_SESSION['userId']))
                 $_SESSION['userId'] = $row['userId'];
                 $_SESSION['avatarUrl'] = $row['avatarUrl'];
                 echo $_SESSION['userId'];
-                header("Location: index.php");
+                if(isset($_SESSION["prev_url"]))
+                {
+                    header("Location: $_SESSION[prev_url]");
+                }
+                else
+                {
+                    header("Location: index.php");
+                }
                 //header('Location: http://localhost/site/userQuestions.php');
             }
         }

@@ -2,7 +2,36 @@
 require_once "dbconnect.php";
 require_once "errors.php";
 try {
-    $sql = 'SELECT questionId FROM question';
+    $filters = "";
+
+    if(isset($_SESSION["only_my_questions"]) && $_SESSION['only_my_questions'])
+    {
+        if(isset($_SESSION["userId"]))
+        {
+            $filters = "askedById=" . $_SESSION["userId"];
+        }
+        else
+        {
+            require_once "auth.php";
+            exit();
+        }
+    }
+    elseif (isset($_SESSION['only_category_questions']) && isset($_GET['categoryId']))
+    {
+        $filters = "q.categoryId=" . $_GET["categoryId"];
+    }
+    else
+    {
+        $filters = "True";
+    }
+
+    $sql = "SELECT question, questionId, name, categoryName
+          FROM question q
+          JOIN user u on q.askedById = u.userId 
+          JOIN category c on q.categoryId = c.categoryId
+          WHERE {$filters}";
+
+
     $result_select = $conn->query($sql);
 
     $countArray = [];
@@ -18,7 +47,6 @@ try {
         $countArray[$i] = $count[0];
         $i++;
     }
-
 
     $filters = "";
 
@@ -51,7 +79,6 @@ try {
 
 
     $result = $conn->query($sql);
-
 
 } catch (PDOexception $error) {
     echo "Get questions error: " . $error->getMessage();
