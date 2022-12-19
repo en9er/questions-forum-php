@@ -1,6 +1,7 @@
 <?php
 require "dbconnect.php";
 require_once "header.php";
+require_once "errors.php";
 if(isset($_GET['questionId']))
 {
 
@@ -18,7 +19,11 @@ if(isset($_GET['questionId']))
         $stmt->execute();
         $user = $stmt->fetch();
 
-
+        $sql = 'SELECT COUNT(likes), COUNT(likes) - (SELECT COUNT(likes) FROM rating WHERE questionId=:id AND likes=1) FROM rating WHERE questionId=:id;';
+        $stmt = $conn->prepare($sql);
+        $stmt->bindValue(":id", $_GET['questionId'], PDO::PARAM_INT);
+        $stmt->execute();
+        $LIKES = $stmt->fetch();
     }
     catch (PDOexception $error) {
         echo "Get categories error: " . $error->getMessage();
@@ -52,7 +57,17 @@ else
                     </div>
                     <!--Card content-->
                     <div class="card-body" style="background-color: azure">
-                        <?php echo $res["question"]; ?>
+                        <?php echo $res["question"];
+                        $likes = $LIKES[0] - $LIKES[1];
+                        echo "<div class='float-right'>Likes: {$likes} Dislikes: {$LIKES[1]}</div>";
+
+                        ?>
+                        <i <?php if (1): ?>
+                            class="fa fa-thumbs-up like-btn"
+                        <?php else: ?>
+                            class="fa fa-thumbs-o-up like-btn"
+                        <?php endif ?>
+                                data-id="<?php echo 26 ?>"></i>
                     </div>
                 </div>
             </div>
