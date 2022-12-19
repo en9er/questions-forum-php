@@ -62,12 +62,6 @@ else
                         echo "<div class='float-right'>Likes: {$likes} Dislikes: {$LIKES[1]}</div>";
 
                         ?>
-                        <i <?php if (1): ?>
-                            class="fa fa-thumbs-up like-btn"
-                        <?php else: ?>
-                            class="fa fa-thumbs-o-up like-btn"
-                        <?php endif ?>
-                                data-id="<?php echo 26 ?>"></i>
                     </div>
                 </div>
             </div>
@@ -76,6 +70,10 @@ else
                     if (isset($_SESSION["userId"]))
                     {
                         require "savePrevUrl.php";
+                        if($_SESSION["userId"] == $askedById)
+                        {
+                            echo "<a href=deleteQuestion.php?questionId={$_GET['questionId']} class='btn btn-danger btn-md float-right text-center mt-3'>Delete question<a>";
+                        }
                         require "aswerForm.php";
                     }
                     else{
