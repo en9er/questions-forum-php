@@ -11,13 +11,11 @@
     $msg = "";
     // if button clicked
     if (isset($_POST['save'])) {
-        echo $_FILES;
-        if ($file = fopen($_FILES['avatar']['tmp_name'], 'r+')){
+        if ($file = fopen($_FILES['avatar']['tmp_name'], 'r+')) {
             //получение расширения
             $ext = explode('.', $_FILES["avatar"]["name"]);
             $ext = $ext[count($ext) - 1];
             $filename = 'file' . rand(100000, 999999) . '.' . $ext;
-
             $resource = Container::getFileUploader()->store($file, $filename);
             $picture_url = $resource['ObjectURL'];
             echo $picture_url;

@@ -1,6 +1,7 @@
 <?php
 require_once "header.php";
 require 'dbconnect.php';
+
 require_once 'questions_filters/filter_all_questions.php';
 ?>
 <div class="container mt-100">
